@@ -54,14 +54,3 @@ if uploaded_file is not None:
 
     except Exception as e:
         st.error(f"Failed to process STL file: {e}")
-
-    try:
-        st.subheader("3D Model Viewer")
-        mesh_pv = pv.read(temp_path)
-        plotter = pv.Plotter(off_screen=True)
-        plotter.add_mesh(mesh_pv, color="lightblue")
-        screenshot_path = os.path.join(tempfile.gettempdir(), "mesh.png")
-        plotter.show(screenshot=screenshot_path)
-        st.image(screenshot_path, caption="STL Preview")
-    except Exception as e:
-        st.warning(f"Failed to render STL preview: {e}")
