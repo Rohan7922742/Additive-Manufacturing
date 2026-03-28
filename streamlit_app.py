@@ -1,6 +1,5 @@
 import streamlit as st
 import tempfile
-import pyvista as pv
 from PIL import Image
 import os
 import joblib
