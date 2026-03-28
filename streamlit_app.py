@@ -1,49 +1,33 @@
-import streamlit as st
-import tempfile
-from PIL import Image
 import os
-import joblib
-import pandas as pd
-
 import sys
-
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))       
-PROJECT_ROOT = os.path.dirname(BASE_DIR)                   
-sys.path.append(PROJECT_ROOT)
-
-from src.parsing.load_mesh import load_mesh
-from src.features.extract_all import extract_features
-
-import streamlit as st
 import tempfile
-import pyvista as pv
-from PIL import Image
+import streamlit as st
 import joblib
 import pandas as pd
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))       
-PROJECT_ROOT = os.path.dirname(BASE_DIR)                   
+# --- Fix project path ---
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BASE_DIR)
 sys.path.append(PROJECT_ROOT)
 
 from src.parsing.load_mesh import load_mesh
-
 from src.features.extract_all import extract_features
 
-
+# --- Paths ---
 MODEL_PATH = os.path.join(PROJECT_ROOT, "saved_models", "model.pkl")
 FEATURE_PATH = os.path.join(PROJECT_ROOT, "saved_models", "feature_columns.pkl")
 
+# --- Load model ---
 model = joblib.load(MODEL_PATH)
 feature_columns = joblib.load(FEATURE_PATH)
 
+# --- Streamlit UI ---
 st.title("3D Printability Predictor")
 st.write("Upload an STL file to check if it is printable.")
 
 uploaded_file = st.file_uploader("Upload STL File", type=["stl"])
 
-if uploaded_file is not None:
+if uploaded_file:
     with tempfile.NamedTemporaryFile(delete=False, suffix=".stl") as tmp:
         tmp.write(uploaded_file.read())
         temp_path = tmp.name
