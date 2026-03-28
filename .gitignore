@@ -1,0 +1,6 @@
+*.zip
+*.stl
+__pycache__/
+*.pkl
+*.joblib
+data/raw/
