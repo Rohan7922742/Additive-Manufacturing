@@ -9,12 +9,10 @@ import sys
 
 import os
 
-# --- Set project root so Python can find 'src' ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))       # app/
-PROJECT_ROOT = os.path.dirname(BASE_DIR)                   # AMML/
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))       
+PROJECT_ROOT = os.path.dirname(BASE_DIR)                   
 sys.path.append(PROJECT_ROOT)
 
-# Now imports from src will work
 from src.parsing.load_mesh import load_mesh
 from src.features.extract_all import extract_features
 
